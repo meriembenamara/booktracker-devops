@@ -1,0 +1,81 @@
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  display: flex; flex-direction: column;
+  min-height: 100vh;
+}
+header, footer {
+  background: #4a90e2; color: #fff;
+  text-align: center; padding: 1rem;
+}
+main {
+  flex: 1; padding: 2rem;
+}
+.container {
+  display: flex; gap: 2rem;
+}
+/* Formulaire */
+.book-form {
+  background: #fff; padding: 1rem;
+  border-radius: 5px; flex: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.book-form input, .book-form select {
+  width: 100%; padding: 0.5rem;
+  font-size: 1rem;
+}
+.book-form button {
+  padding: 0.5rem 1rem; background: #4a90e2;
+  color: #fff; border: none; cursor: pointer;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+/* Liste */
+.book-list {
+  background: #fff; padding: 1rem;
+  border-radius: 5px; flex: 2;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.filter {
+  margin-bottom: 1rem;
+}
+.book-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+.book-table th,
+.book-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+.book-table th {
+  background: #f0f0f0;
+}
+.book-table tr:nth-child(even) {
+  background: #fafafa;
+}
+.book-table tr:hover {
+  background: #f1f1f1;
+}
+/* Boutons actions */
+.btn {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  margin-right: 0.3rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.btn.edit {
+  background: #4a90e2;
+  color: #fff;
+}
+.btn.delete {
+  background: #e24a4a;
+  color: #fff;
+}

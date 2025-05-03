@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>BookTracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <header>
+    <h1>BookTracker</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Formulaire ajout ou édition -->
+      <form method="post" action="{{ url_for('main.update', book_id=edit_book.id) if edit_book else url_for('main.add') }}" class="book-form">
+        <h2>{{ "Modifier" if edit_book else "Ajouter un livre" }}</h2>
+        <input type="text" name="title" placeholder="Titre du livre" value="{{ edit_book.title if edit_book else '' }}" required>
+        <input type="text" name="author" placeholder="Auteur" value="{{ edit_book.author if edit_book else '' }}" required>
+        <select name="status" required>
+          <option value="" disabled {{ "selected" if not edit_book }}>Statut</option>
+          {% for s in ["à lire", "en cours", "terminé"] %}
+          <option value="{{ s }}" {% if edit_book and edit_book.status == s %}selected{% endif %}>{{ s.capitalize() }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">{{ "Enregistrer" if edit_book else "Ajouter" }}</button>
+      </form>
+
+      <!-- Liste des livres -->
+      <div class="book-list">
+        <h2>Mes livres</h2>
+
+        <!-- Filtre -->
+        <form method="get" action="{{ url_for('main.index') }}" class="filter">
+          <label>Filtrer :
+            <select name="status" onchange="this.form.submit()">
+              <option value="">Tous</option>
+              {% for s in ["à lire", "en cours", "terminé"] %}
+              <option value="{{ s }}" {% if request.args.get('status') == s %}selected{% endif %}>{{ s.capitalize() }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </form>
+
+        <table class="book-table">
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Auteur</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for book in books %}
+            <tr>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.status }}</td>
+              <td>
+                <a href="{{ url_for('main.edit', book_id=book.id) }}" class="btn edit">Modifier</a>
+                <a href="{{ url_for('main.delete', book_id=book.id) }}" class="btn delete">Supprimer</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Ben Amara Meriem — TP DevOps
+  </footer>
+</body>
+</html>
+
+
